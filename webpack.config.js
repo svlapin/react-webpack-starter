@@ -1,8 +1,14 @@
+const path = require('path');
+
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+const OUT_DIR = path.join(__dirname, 'dist');
+
 module.exports = {
   entry: './ui/js/app.js',
   output: {
-    path: __dirname + '/ui',
-    filename: 'bundle.js'
+    path: OUT_DIR,
+    filename: 'bundle.[hash].js'
   },
   module: {
     loaders: [
@@ -15,5 +21,11 @@ module.exports = {
         }
       }
     ]
-  }
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './ui/index.html'
+    })
+  ],
+  devtool: 'source-map'
 };
